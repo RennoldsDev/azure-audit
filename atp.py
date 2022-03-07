@@ -9,10 +9,15 @@ from datetime import date
 load_dotenv()
 
 
+# Function imported within main.py
 def get_atp_status():
+    # Uses environment variables stored in .env
     tenant_id = os.getenv('TENANTID')
     app_id = os.getenv('APPID')
     app_secret = os.getenv('SECRET')
+
+    # The following until url was set from Microsoft Documentation here:
+    # https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/run-advanced-query-sample-python?view=o365-worldwide)
 
     url = "https://login.microsoftonline.com/%s/oauth2/token" % (tenant_id)
 
@@ -32,6 +37,7 @@ def get_atp_status():
     json_response = json.loads(response.read())
     aad_token = json_response["access_token"]
 
+    # End of documentation guide
     url = "https://api.securitycenter.microsoft.com/api/machines"
     headers = {
         'Content-Type': 'application/json',
@@ -51,4 +57,5 @@ def get_atp_status():
                 'defenderStatus': device['onboardingStatus'],
                 'dateRan': date.today()
             })
+    # Return device_list to be used in main.py
     return device_list
