@@ -42,13 +42,13 @@ def get_atp_status():
     response = requests.get(url, headers=headers)
     response_json = response.json()
 
-    user_dict = []
+    device_list = []
 
     for device in response_json['value']:
-        user_dict.append(
+        device_list.append(
             {
                 'device': device['computerDnsName'],
                 'defenderStatus': device['onboardingStatus'],
                 'dateRan': date.today()
             })
-    return user_dict
+    return device_list

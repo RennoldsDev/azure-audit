@@ -1,13 +1,18 @@
+import os
+
 from azure.identity import InteractiveBrowserCredential
 from msgraph.core import GraphClient, APIVersion
 import pandas as pd
 from datetime import date as date
 import atp as atp
+from dotenv import load_dotenv
+
+load_dotenv()
 
 today = date.today()
 
 # Uses Azure Identity to sign in user and MS Graph to run all queries
-browser_credential = InteractiveBrowserCredential(client_id='0f52d1d9-7263-4e20-a3c2-2221b68b7da7')
+browser_credential = InteractiveBrowserCredential(client_id=os.getenv('APPID'))
 client = GraphClient(credential=browser_credential, api_version=APIVersion.beta)
 
 
@@ -49,9 +54,11 @@ for device in devices_json['value']:
             'dateRan': today,
         })
 
-# Gets all users from MS Graph and formats in JSON
+# Gets all users (top 999 for now) from MS Graph and formats in JSON
 result = client.get('/users?$top=999')
 QueryResults = result.json()
+
+# TODO add pagination instead of 'top' call
 
 # Sets User list for appending information
 UserList = []
