@@ -25,6 +25,6 @@ def get_csv_files():
     device_list_csv.to_csv(f'DeviceEncryption.csv-{today}.csv', index=False)
 
     atp_devices_csv = pd.DataFrame(atp_devices)
-    atp_devices_csv.to_csv(f'EncryptionStatus.csv-{today}.csv', index=False)
+    atp_devices_csv.to_csv(f'DefenderStatus.csv-{today}.csv', index=False)
 
     return None

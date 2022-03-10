@@ -12,9 +12,9 @@ load_dotenv()
 # Function imported within main.py
 def get_atp_status():
     # Uses environment variables stored in .env
-    tenant_id = os.getenv('TENANTID')
-    app_id = os.getenv('APPID')
-    app_secret = os.getenv('SECRET')
+    tenant_id = os.getenv('AZURE_TENANT_ID')
+    app_id = os.getenv('AZURE_CLIENT_ID')
+    app_secret = os.getenv('AZURE_CLIENT_SECRET')
 
     # The following until url was set from Microsoft Documentation here:
     # https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/run-advanced-query-sample-python?view=o365-worldwide)

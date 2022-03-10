@@ -15,8 +15,17 @@ today = date.today()
 windows_devices = client.get('/deviceManagement/managedDeviceEncryptionStates/')
 devices_json = windows_devices.json()
 
+# Uses pagination within the graph call to get all users
+while '@odata.nextLink' in devices_json.keys():
+    paginated_query = client.get(devices_json['@odata.nextLink'])
+    paginated_results = paginated_query.json()
+    if '@odata.nextLink' in paginated_results:
+        devices_json['@odata.nextLink'] = paginated_results['@odata.nextLink']
+    else:
+        del devices_json['@odata.nextLink']
+    devices_json['value'].extend(paginated_results['value'])
 
-# TODO add pagination instead of 'top' call
+
 def get_device_encryption():
     # Sets device list for appending information
     devices = []
