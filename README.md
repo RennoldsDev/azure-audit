@@ -2,13 +2,13 @@
 
 These basic scripts audit the following information from your Azure environment
 
-- All active users (note: the 'jobTitle' field must be present). For me in my environment I only need to audit active users and this filters out test users / others. Modify line 66 as necessary.
+- All active users (note: the 'jobTitle' field must be present). For me in my environment I only need to audit active users and this filters out test users / others. Modify line 22 of user_list.py as necessary.
 
 - All devices within Defender ATP and their onboarding status.
 
 - All devices with their encryption state.
 
-- All directory roles with their members. Any role without a member is omitted. This is set on line 27.
+- All directory roles with their members. Any role without a member is omitted. This is set on line 24 of directory_roles.py.
 
 ## Requirements
 
@@ -19,21 +19,19 @@ These basic scripts audit the following information from your Azure environment
 3. Create an App Registration within Auzre. Use the 'Desktop Application' option. Reference [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app "here")
 	- The following API permissions are used:
 	
-		- BitlockerKey.ReadBasic.All (Delegated)
-		- Device.Read.All (Delegated)
-		- DeviceManagementConfiguration.Read.All (Delegated)
-		- Directory.Read.All (Delegated)
+		- BitlockerKey.ReadBasic.All (Application)
+		- Device.Read.All (Application)
+		- DeviceManagementConfiguration.Read.All (Application)
 		- Directory.Read.All (Application)
-		- User.Read (Delegated)
-		- User.Read.All (Delegated)
+		- User.Read.All (Application)
 		- Machine.Read.All (Application)
 
 
 4. Create your .env with the following:
 	
-	1. SECRET (Application secret)
-	2. TENANTID (Tenant ID of your Azure tenant)
-	3. APPID (Application ID for your Registered Application)
+	1.AZURE_TENANT_ID
+	2.AZURE_CLIENT_ID
+	3.AZURE_CLIENT_SECRET
 	
 5. Run main.py - multiple csv files will be placed in the project root directory
 
