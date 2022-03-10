@@ -29,12 +29,15 @@ These basic scripts audit the following information from your Azure environment
 
 4. Create your .env with the following:
 	
-	1.AZURE_TENANT_ID
-	2.AZURE_CLIENT_ID
-	3.AZURE_CLIENT_SECRET
+	1. AZURE_CLIENT_ID
+	2. AZURE_TENANT_ID
+	3. AZURE_CLIENT_SECRET
 	
 5. Run main.py - multiple csv files will be placed in the project root directory
 
 
 #### Current TODOs
-1. Use Graph API pagination instead of 'top' call. Currently will only grab top 999 users.
+NONE
+
+### Recent TODOs Finished
+1. Added Pagination
