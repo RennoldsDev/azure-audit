@@ -1,9 +1,14 @@
-import device_encryption, directory_roles, user_list, atp
-import pandas as pd
 from datetime import date as date
+
+import pandas as pd
 from azure.identity import EnvironmentCredential
-from msgraph.core import GraphClient, APIVersion
 from dotenv import load_dotenv
+from msgraph.core import GraphClient, APIVersion
+
+import atp
+import device_encryption
+import directory_roles
+import user_list
 
 load_dotenv()
 credential = EnvironmentCredential()
