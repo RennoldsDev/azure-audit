@@ -1,25 +1,13 @@
 from datetime import date as date
-from azure.identity import EnvironmentCredential
-from msgraph.core import GraphClient, APIVersion
-from dotenv import load_dotenv
 import pagination
 
-load_dotenv()
 
-credential = EnvironmentCredential()
-client = GraphClient(credential=credential, api_version=APIVersion.beta)
+def get_user_list(graph_call, client):
+    result = client.get(graph_call)
+    query_results = result.json()
 
-today = date.today()
-
-# Gets first 100 users, pagination used to grab the rest
-result = client.get('/users')
-query_results = result.json()
-
-# Uses pagination within the graph call to get all users
-pagination.pagination(query_results)
-
-
-def get_user_list():
+    # Uses pagination within the graph call to get all users
+    pagination.pagination(query_results)
     # Sets User list for appending information
     user_list = []
 
@@ -29,7 +17,7 @@ def get_user_list():
                 {
                     'upn': user['displayName'],
                     'displayName': user['userPrincipalName'],
-                    'dateRan': today,
+                    'dateRan': date.today(),
                 }
             )
     return user_list

@@ -1,24 +1,28 @@
-import device_encryption as device
-import directory_roles as directory
-import user_list as user
+import device_encryption, directory_roles, user_list, atp
 import pandas as pd
-import atp as atp
 from datetime import date as date
+from azure.identity import EnvironmentCredential
+from msgraph.core import GraphClient, APIVersion
+from dotenv import load_dotenv
+
+load_dotenv()
+credential = EnvironmentCredential()
+client = GraphClient(credential=credential, api_version=APIVersion.beta)
 
 today = date.today()
 
 
 def get_csv_files():
-    directory_roles = directory.get_directory_roles()
-    user_list = user.get_user_list()
-    device_list = device.get_device_encryption()
+    dir_roles = directory_roles.get_directory_roles('/directoryRoles', client)
+    users = user_list.get_user_list('/users', client)
+    device_list = device_encryption.get_device_encryption('/deviceManagement/managedDeviceEncryptionStates/', client)
     atp_devices = atp.get_atp_status()
 
     # Uses Pandas to cleanly export lists to csv
-    directory_roles_csv = pd.DataFrame(directory_roles)
+    directory_roles_csv = pd.DataFrame(dir_roles)
     directory_roles_csv.to_csv(f'DirectoryRoles.csv-{today}.csv', index=False)
 
-    user_list_csv = pd.DataFrame(user_list)
+    user_list_csv = pd.DataFrame(users)
     user_list_csv.to_csv(f'UserList.csv-{today}.csv', index=False)
 
     device_list_csv = pd.DataFrame(device_list)

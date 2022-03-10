@@ -1,18 +1,8 @@
 from datetime import date as date
-from azure.identity import EnvironmentCredential
-from msgraph.core import GraphClient, APIVersion
-from dotenv import load_dotenv
-
-load_dotenv()
-
-credential = EnvironmentCredential()
-client = GraphClient(credential=credential, api_version=APIVersion.beta)
-
-today = date.today()
 
 
-def get_directory_roles():
-    directory_roles = client.get('/directoryRoles')
+def get_directory_roles(graph_call, client):
+    directory_roles = client.get(graph_call)
 
     # Sets blank list and gets all Azure Directory Roles. If members exist in a role it will append information
     roles = []
@@ -30,7 +20,7 @@ def get_directory_roles():
                             'role': role['displayName'],
                             'id': role['id'],
                             'upn': members.json()['value'][i]['userPrincipalName'],
-                            'dateRan': today,
+                            'dateRan': date.today(),
                         }
 
                     )
