@@ -1,23 +1,22 @@
-from datetime import date as date
-import pagination
+from pagination import pagination_query
 
 
-def get_user_list(graph_call, client):
+def get_user_list(graph_call, client, date):
     result = client.get(graph_call)
     query_results = result.json()
 
     # Uses pagination within the graph call to get all users
-    pagination.pagination(query_results)
+    pagination_query(query_results)
     # Sets User list for appending information
-    user_list = []
+    users = []
 
     for user in query_results['value']:
         if user['accountEnabled'] is True and user['jobTitle'] is not None:
-            user_list.append(
+            users.append(
                 {
                     'upn': user['displayName'],
                     'displayName': user['userPrincipalName'],
-                    'dateRan': date.today(),
+                    'dateRan': date,
                 }
             )
-    return user_list
+    return users

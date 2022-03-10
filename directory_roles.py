@@ -1,7 +1,4 @@
-from datetime import date as date
-
-
-def get_directory_roles(graph_call, client):
+def get_directory_roles(graph_call, client, date):
     directory_roles = client.get(graph_call)
 
     # Sets blank list and gets all Azure Directory Roles. If members exist in a role it will append information
@@ -20,7 +17,7 @@ def get_directory_roles(graph_call, client):
                             'role': role['displayName'],
                             'id': role['id'],
                             'upn': members.json()['value'][i]['userPrincipalName'],
-                            'dateRan': date.today(),
+                            'dateRan': date,
                         }
 
                     )

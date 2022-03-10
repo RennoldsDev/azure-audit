@@ -8,7 +8,7 @@ client = GraphClient(credential=credential, api_version=APIVersion.beta)
 
 
 # Uses pagination within the graph call to get all users
-def pagination(initial_result):
+def pagination_query(initial_result):
 
     while '@odata.nextLink' in initial_result.keys():
         paginated_query = client.get(initial_result['@odata.nextLink'])

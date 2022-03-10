@@ -4,13 +4,13 @@ import json
 import urllib.request
 import urllib.parse
 import requests
-from datetime import date
+
 
 load_dotenv()
 
 
 # Function imported within main.py
-def get_atp_status():
+def get_atp_status(date):
     # Uses environment variables stored in .env
     tenant_id = os.getenv('AZURE_TENANT_ID')
     app_id = os.getenv('AZURE_CLIENT_ID')
@@ -55,7 +55,7 @@ def get_atp_status():
             {
                 'device': device['computerDnsName'],
                 'defenderStatus': device['onboardingStatus'],
-                'dateRan': date.today()
+                'dateRan': date
             })
     # Return device_list to be used in main.py
     return device_list
