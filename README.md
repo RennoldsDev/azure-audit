@@ -37,4 +37,7 @@ These basic scripts audit the following information from your Azure environment
 
 
 #### Current TODOs
-1. Use Graph API pagination instead of 'top' call. Currently will only grab top 999 users.
+NONE
+
+### Recent TODOs Finished
+1. Added Pagination
