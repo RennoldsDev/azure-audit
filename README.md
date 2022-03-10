@@ -2,13 +2,13 @@
 
 These basic scripts audit the following information from your Azure environment
 
-- All active users (note: the 'jobTitle' field must be present). For me in my environment I only need to audit active users and this filters out test users / others. Modify line 22 of user_list.py as necessary.
+- All active users (note: the 'jobTitle' field must be present). For me in my environment I only need to audit active users and this filters out test users / others. Modify line 15 of user_list.py as necessary.
 
 - All devices within Defender ATP and their onboarding status.
 
 - All devices with their encryption state.
 
-- All directory roles with their members. Any role without a member is omitted. This is set on line 24 of directory_roles.py.
+- All directory roles with their members. Any role without a member is omitted. This is set on line 14 of directory_roles.py.
 
 ## Requirements
 
