@@ -49,8 +49,4 @@ def get_csv_files():
         f'DefenderStatus-{today}.csv',
         index=False)
 
-
-
-
-
     return None
