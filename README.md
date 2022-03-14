@@ -32,8 +32,24 @@ These basic scripts audit the following information from your Azure environment
 	1. AZURE_CLIENT_ID
 	2. AZURE_TENANT_ID
 	3. AZURE_CLIENT_SECRET
+
+
+5. Create a 'groups.py' file in the root directory. This file should be a dictionary (named group_list) with the key being the azure group ID and the value being the desired display name in the csv.
+
+
+	Example:
 	
-5. Run main.py - multiple csv files will be placed in the project root directory
+	group_list={
+	
+	'alk3ng-3346lkjd-2lkjsdf': 'MyGroup'
+	
+	}
+	
+
+
+6. Run main.py - multiple csv files will be placed in the project root directory
+
+
 
 
 #### Current TODOs
