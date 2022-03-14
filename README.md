@@ -10,6 +10,8 @@ These basic scripts audit the following information from your Azure environment
 
 - All directory roles with their members. Any role without a member is omitted. This is set on line 14 of directory_roles.py.
 
+- Group memberships for desired groups
+
 ## Requirements
 
 1. Clone repository to desired location
